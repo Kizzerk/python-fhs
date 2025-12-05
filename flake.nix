@@ -12,7 +12,7 @@
     in {
       devShells.${system}.default =
 
-        pkgs.buildFHSUserEnvBubblewrap {
+        pkgs.buildFHSUserEnv {
           name = "pybash-dev";
           targetPkgs = pkgs: with pkgs; [
             bash
@@ -38,11 +38,6 @@
               target = "$HOME";
             };
           };
-        };
-        config = {
-          environment.pathsToLink = [
-            "/bin"
-          ];
         };
     };
 }
