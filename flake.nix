@@ -23,7 +23,6 @@
             gcc
             python3
             python3Packages.venvShellHook
-            nodejs_24
           ];
         
           # Launch into bash by default
