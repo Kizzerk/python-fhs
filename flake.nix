@@ -15,7 +15,9 @@
         pkgs.buildFHSUserEnvBubblewrap {
           name = "pybash-dev";
           targetPkgs = pkgs: with pkgs; [
+            bash
             bashInteractive
+            coreutils
             git
             curl
             gcc
