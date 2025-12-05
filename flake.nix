@@ -10,8 +10,11 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
     in {
-      devShells.${system}.default =
-        pkgs.buildFHSUserEnvBubblewrap {
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [ pkgs.bashInteractive pkgs.coreutils ];
+
+        shellHook = ''
+        exec ${pkgs.buildFHSUserEnvBubblewrap {
           name = "pybash-dev";
           # Packages to include inside the FHS root          
           targetPkgs = pkgs: with pkgs; [
@@ -24,20 +27,16 @@
             python3
             python3Packages.venvShellHook
           ];
-
-          # Ensure /bin/bash and bin paths exist inside FHS
-          extraOutputsToInstall = [ "bin" ];
-        
-          # Launch into bash by default
           runScript = "bash";
-
-          # Optional: set HOME inside the container to make venvs cleaner
+          extraOutputsToInstall = [ "bin" ];          
           extraMounts = {
             home = {
               source = "$HOME";
               target = "$HOME";
             };
           };
+        }}/bin/bash
+      '';
           /*
           # Optional: persist pip cache to your home
           shellHook = ''
