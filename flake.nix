@@ -11,9 +11,9 @@
       pkgs = import nixpkgs { inherit system; };
     in {
       devShells.${system}.default =
-
-        pkgs.buildFHSUserEnv {
+        pkgs.buildFHSUserEnvBubblewrap {
           name = "pybash-dev";
+          # Packages to include inside the FHS root          
           targetPkgs = pkgs: with pkgs; [
             bash
             bashInteractive
@@ -24,6 +24,9 @@
             python3
             python3Packages.venvShellHook
           ];
+
+          # Ensure /bin/bash and bin paths exist inside FHS
+          extraOutputsToInstall = [ "bin" ];
         
           # Launch into bash by default
           runScript = "bash";
@@ -35,6 +38,18 @@
               target = "$HOME";
             };
           };
+          /*
+          # Optional: persist pip cache to your home
+          shellHook = ''
+            export PIP_CACHE_DIR="$HOME/.cache/pip"
+            export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+            # Auto-create and activate a .venv if it exists
+            if [ -d ".venv" ]; then
+              source .venv/bin/activate
+            fi
+          '';
+          */
         };
     };
 }
