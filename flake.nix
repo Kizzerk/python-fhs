@@ -23,11 +23,9 @@
             gcc
             python3
             python3Packages.venvShellHook
+            nodejs_24
           ];
-
-          # This ensures /bin/bash and other interpreter paths appear **inside the FHS**.
-          extraOutputsToInstall = [ "bin" ];
-          
+        
           # Launch into bash by default
           runScript = "bash";
 
