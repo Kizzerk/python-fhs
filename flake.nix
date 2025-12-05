@@ -21,6 +21,7 @@
           pkgs.python3
           pkgs.python3Packages.venvShellHook
           pkgs.libGL
+          pkgs.glib
         ];
           # Optional: set HOME inside the container to make venvs cleaner
           extraMounts = {
