@@ -9,7 +9,6 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-    in {
       python-env = pkgs.buildFHSUserEnv {
         name = "python-env";
           targetPkgs = pkgs: [
@@ -24,6 +23,7 @@
         ];
 
       };
+    in {
       devShells.default = pkgs.mkShell {
         buildInputs = [
           python-env
