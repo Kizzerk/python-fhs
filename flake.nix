@@ -39,5 +39,10 @@
             };
           };
         };
+        config = {
+          environment.pathsToLink = [
+            "/bin"
+          ];
+        };
     };
 }
