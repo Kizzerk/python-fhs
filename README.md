@@ -1,1 +1,6 @@
-run with nix develop
+# To Run
+nix develop
+
+Then
+
+python-env
