@@ -24,7 +24,7 @@
 
       };
     in {
-      devShells.default = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
           python-env
         ];
